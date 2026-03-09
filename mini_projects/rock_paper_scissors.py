@@ -2,14 +2,13 @@ import random
 import os
 import time
 
-options = {1: "Rock", 2: "Paper", 3: "Scissors"}
+options = ["Rock", "Paper", "Scissors"]
 
 
 def choice():
-    num = random.randint(1, 3)
+    num = random.randint(0, 2)
     computer_choice = options[num]
     return computer_choice
-
 
 def menu():
     print("=" * 50)
@@ -49,8 +48,8 @@ while True:
     while True:
         player_choice = input(f"Enter you choice (1-3) : ")
         try:
-            player_choice = int(player_choice)
-            if player_choice > 0 and player_choice < 4:
+            player_choice = int(player_choice) - 1
+            if player_choice >= 0 and player_choice <= 2:
                 player_choice = options[player_choice]
                 break
             else:
@@ -59,13 +58,14 @@ while True:
             print(f"Invalid Input, please enter Integer!")
     win = winner(computer_choice, player_choice)
     print(f"COMPUTER CHOICE : {computer_choice}\nPLAYER CHOICE : {player_choice}")
-    if winner == "Draw":
+    if win == "Draw":
         print("The game is draw!")
-    elif winner == "Player":
+    elif win == "Player":
         print("You WON!")
-    else:
+    elif win == "Computer":
         print("Better luck next time :( ")
-
+    else:
+        print("ERROR")
     q = input(f"Enter 'q' to quit or Enter to continue...")
     if q.strip().lower() == "q":
         break
