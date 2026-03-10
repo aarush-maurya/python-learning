@@ -1,3 +1,4 @@
+#IMPORTANT: You must have color.py in the same directory as this file, you can get the color.py on my github, python-learning repo
 import random
 from os import system
 from time import sleep
