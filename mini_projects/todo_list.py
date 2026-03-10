@@ -1,5 +1,6 @@
-import os
-import time
+# IMPORTANT: You must have color.py in the same directory as this file, you can get the color.py on my github, python-learning repo
+from os import system
+from time import sleep
 import color as c
 
 todo_list = []
@@ -19,7 +20,9 @@ def menu():
 
 def add(todo_list):
     while True:
-        title = input(f"{c.bold}{c.blue}Enter your task ('q' to return to menu): {c.reset}")
+        title = input(
+            f"{c.bold}{c.blue}Enter your task ('q' to return to menu): {c.reset}"
+        )
         if title.strip().lower() == "q":
             break
         completed = input(f"{c.yellow}Is that completed ? (Y/n) : {c.reset}")
@@ -45,9 +48,7 @@ def view(todo_list):
 def mark(todo_list):
     while True:
         while True:
-            index = input(
-                f"{c.bold}{c.blue}Enter the task number to mark it(1 - {len(todo_list)}) ('q' to return to menu) : {c.reset}"
-            )
+            index = input(f"{c.bold}{c.blue}Enter the task number to mark it(1 - {len(todo_list)}) ('q' to return to menu) : {c.reset}")
             try:
                 index = int(index) - 1
                 break
@@ -68,10 +69,11 @@ def mark(todo_list):
 
 def delete(todo_list):
     while True:
+        sleep(0.5)
+        system("cls")
+        view(todo_list)
         while True:
-            index = input(
-                f"{c.bold}{c.blue}Enter the task number to remove (1 - {len(todo_list)}) ('q' to return to menu) : {c.reset}"
-            )
+            index = input(f"{c.bold}{c.blue}Enter the task number to remove (1 - {len(todo_list)}) ('q' to return to menu) : {c.reset}")
             try:
                 index = int(index) - 1
                 break
@@ -88,8 +90,8 @@ def delete(todo_list):
 
 
 while True:
-    time.sleep(0.1)
-    os.system("cls")
+    sleep(0.1)
+    system("cls")
     menu()
     while True:
         mode = input(f"{c.bold}{c.blue}Enter the mode (1 - 5) : {c.reset}")
@@ -102,24 +104,22 @@ while True:
         except ValueError:
             print(f"{c.red}Invalid Choice, try again!{c.reset}")
     if mode == 1:
-        time.sleep(0.1)
-        os.system("cls")
+        sleep(0.1)
+        system("cls")
         add(todo_list)
     elif mode == 2:
-        time.sleep(0.1)
-        os.system("cls")
+        sleep(0.1)
+        system("cls")
         view(todo_list)
         input("Press Enter to return to the Main Menu...")
     elif mode == 3:
-        time.sleep(0.1)
-        os.system("cls")
+        sleep(0.1)
+        system("cls")
         view(todo_list)
         mark(todo_list)
     elif mode == 4:
-        time.sleep(0.1)
-        os.system("cls")
-        view(todo_list)
+        sleep(0.1)
+        system("cls")
         delete(todo_list)
     elif mode == 5:
         break
-
