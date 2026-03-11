@@ -41,14 +41,15 @@ while times_rolled < roll_amount:
     elif num == 6:
         no_6 += 1
 
-    print(f"{times_rolled + 1}. {num}")
+    print(f"{(times_rolled + 1):>3}. {num}")
     times_rolled += 1
-
-print(f"Number of times '1' occured : {no_1:^3}, percentage : {round((no_1/roll_amount * 100), 2)}")
+print()
+print(f"Number of times dice rolled : {times_rolled}")
+print(f"Number of times '1' occured : {no_1:^3}, percentage : {round((no_1/roll_amount * 100),2)}")
 print(f"Number of times '2' occured : {no_2:^3}, percentage : {round((no_2/roll_amount * 100),2)}")
 print(f"Number of times '3' occured : {no_3:^3}, percentage : {round((no_3/roll_amount * 100),2)}")
 print(f"Number of times '4' occured : {no_4:^3}, percentage : {round((no_4/roll_amount * 100),2)}")
 print(f"Number of times '5' occured : {no_5:^3}, percentage : {round((no_5/roll_amount * 100),2)}")
 print(f"Number of times '6' occured : {no_6:^3}, percentage : {round((no_6/roll_amount * 100),2)}")
-
+print()
 input("Hit Enter to Exit...")
