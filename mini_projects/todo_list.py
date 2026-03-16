@@ -1,46 +1,46 @@
 # IMPORTANT: You must have color.py in the same directory as this file, you can get the color.py on my github, python-learning repo
 from os import system
 from time import sleep
-import color as c
+from color import Color
 
 todo_list = []
 
 
 def menu():
-    title_menu = f"{c.bold}{c.blue}===MENU==={c.reset}"
-    print(f'{c.green}{"=" * 50}{c.reset}')
+    title_menu = f"{Color.bold}{Color.blue}===MENU==={Color.reset}"
+    print(f'{Color.green}{"=" * 50}{Color.reset}')
     print(f"{title_menu:^50}")
-    print(f"{c.bold}{c.yellow}1. Add Tasks")
+    print(f"{Color.bold}{Color.yellow}1. Add Tasks")
     print(f"2. View Tasks")
     print(f"3. Mark Tasks")
     print(f"4. Delete Tasks")
-    print(f"5. Exit{c.reset}")
-    print(f"{c.green}{'=' * 50}{c.reset}")
+    print(f"5. Exit{Color.reset}")
+    print(f"{Color.green}{'=' * 50}{Color.reset}")
 
 
 def add(todo_list):
     while True:
         title = input(
-            f"{c.bold}{c.blue}Enter your task ('q' to return to menu): {c.reset}"
+            f"{Color.bold}{Color.blue}Enter your task ('q' to return to menu): {Color.reset}"
         )
         if title.strip().lower() == "q":
             break
-        completed = input(f"{c.yellow}Is that completed ? (Y/n) : {c.reset}")
+        completed = input(f"{Color.yellow}Is that completed ? (Y/n) : {Color.reset}")
         if completed.strip().lower() == "y":
             completed = True
         else:
             completed = False
         task = {"task": title, "completed": completed}
         todo_list.append(task)
-        print(f"{c.green}Added '{task["task"]}' to the list!{c.reset}")
+        print(f"{Color.green}Added '{task["task"]}' to the list!{Color.reset}")
 
 
 def view(todo_list):
-    view_title = f"{c.bold}{c.blue}===TODO-LIST==={c.reset}"
+    view_title = f"{Color.bold}{Color.blue}===TODO-LIST==={Color.reset}"
     print(f"{view_title:^50}")
     id = 1
     for task in todo_list:
-        print(f"{c.yellow}{id}. {task['task']} - {task['completed']}{c.reset}")
+        print(f"{Color.yellow}{id}. {task['task']} - {task['completed']}{Color.reset}")
         id += 1
     print("=" * 50)
 
@@ -48,7 +48,7 @@ def view(todo_list):
 def mark(todo_list):
     while True:
         while True:
-            index = input(f"{c.bold}{c.blue}Enter the task number to mark it(1 - {len(todo_list)}) ('q' to return to menu) : {c.reset}")
+            index = input(f"{Color.bold}{Color.blue}Enter the task number to mark it(1 - {len(todo_list)}) ('q' to return to menu) : {Color.reset}")
             try:
                 index = int(index) - 1
                 break
@@ -56,7 +56,7 @@ def mark(todo_list):
                 if index.strip().lower() == "q":
                     break
                 else:
-                    print(f"{c.bold}{c.red}Invalid Input, Try again!{c.reset}")
+                    print(f"{Color.bold}{Color.red}Invalid Input, Try again!{Color.reset}")
         if index == "q":
             break
         else:
@@ -64,7 +64,7 @@ def mark(todo_list):
                 todo_list[index]["completed"] = False
             elif todo_list[index]["completed"] == False:
                 todo_list[index]["completed"] = True
-            print(f"{c.yellow}Configued '{todo_list[index]["task"]}' as {todo_list[index]["completed"]} !{c.reset}")
+            print(f"{Color.yellow}Configued '{todo_list[index]["task"]}' as {todo_list[index]["completed"]} !{Color.reset}")
 
 
 def delete(todo_list):
@@ -73,7 +73,7 @@ def delete(todo_list):
         system("cls")
         view(todo_list)
         while True:
-            index = input(f"{c.bold}{c.blue}Enter the task number to remove (1 - {len(todo_list)}) ('q' to return to menu) : {c.reset}")
+            index = input(f"{Color.bold}{Color.blue}Enter the task number to remove (1 - {len(todo_list)}) ('q' to return to menu) : {Color.reset}")
             try:
                 index = int(index) - 1
                 break
@@ -81,11 +81,11 @@ def delete(todo_list):
                 if index.strip().lower() == "q":
                     break
                 else:
-                    print(f"{c.bold}{c.red}Invalid Input, Try again!{c.reset}")
+                    print(f"{Color.bold}{Color.red}Invalid Input, Try again!{Color.reset}")
         if index == "q":
             break
         else:
-            print(f"{c.green}Removed '{todo_list[index]["task"]}' from the list{c.reset}")
+            print(f"{Color.green}Removed '{todo_list[index]["task"]}' from the list{Color.reset}")
             todo_list.pop(index)
 
 
@@ -94,15 +94,15 @@ while True:
     system("cls")
     menu()
     while True:
-        mode = input(f"{c.bold}{c.blue}Enter the mode (1 - 5) : {c.reset}")
+        mode = input(f"{Color.bold}{Color.blue}Enter the mode (1 - 5) : {Color.reset}")
         try:
             mode = int(mode)
             if mode < 1 or mode > 5:
-                print(f"{c.red}Please choose from 1 to 5{c.reset}")
+                print(f"{Color.red}Please choose from 1 to 5{Color.reset}")
             else:
                 break
         except ValueError:
-            print(f"{c.red}Invalid Choice, try again!{c.reset}")
+            print(f"{Color.red}Invalid Choice, try again!{Color.reset}")
     if mode == 1:
         sleep(0.1)
         system("cls")
