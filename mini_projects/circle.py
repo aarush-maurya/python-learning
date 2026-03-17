@@ -19,5 +19,5 @@ class Circle:
         else:
             raise ValueError("Expected only one argument, either radian or length")
         
-    
-circle = Circle(5)
+radius = 5
+circle = Circle(radius)
