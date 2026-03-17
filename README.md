@@ -24,7 +24,7 @@ python-learning/
 ├── data_structures/ # Lists, dicts, sets, tuples
 ├── oop/             # Classes, objects, and OOP examples
 ├── mini_projects/   # Projects like games, calculators, and scripts
-├── projects         # somewhat larger projects
+├── projects/        # somewhat larger projects
 └── README.md        # This file
 ```
 
