@@ -129,8 +129,9 @@ class Record:
         string += f"{'TYPE:':<13}{self.amount_type.upper()}\n"
         string += f"{'CATEGORY:':<13}{self.category}\n"
         string += "---------------------------------------------------\n"
-        string += f"DESCRIPTION:\n {self.wrap_text(self.desc, 9)}\n"
-        string += f"===================================================\n"
+        if self.desc:
+            string += f"DESCRIPTION:\n {self.wrap_text(self.desc, 9)}\n"
+            string += f"===================================================\n"
         return string
 
     @staticmethod

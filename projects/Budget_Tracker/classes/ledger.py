@@ -39,10 +39,12 @@ class Ledger:
 
     def delete(self, uid: int):
         record = self.search(uid)
-        if record != -1:
-            self.ledger.remove(record)
-        else:
+        if record == -1:
             raise ValueError
+        else:
+            self.ledger.remove(record)
+            self.save()
+            
 
     def save(self):
         with open("ledger.json", "w") as f:
@@ -93,7 +95,11 @@ class Ledger:
         digit_width = len(str(len(self.ledger))) if self.ledger else 1
         titles = [record.title for record in self.ledger]
         title_width = max(list(map(lambda x: len(x), titles))) if self.ledger else 5
-        amount_width = len(str(max([abs(record.amount) for record in self.ledger]))) + 3 if self.ledger else 5
+        amount_width = (
+            len(str(max([abs(record.amount) for record in self.ledger]))) + 3
+            if self.ledger
+            else 5
+        )
 
         string = f"{'[#]':^{digit_width}} |    DATE    | {'TITLE':^{title_width}} | {'AMOUNT':^{amount_width}} | TYPE\n"
         string += f"-------------------------------------------------------\n"

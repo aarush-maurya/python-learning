@@ -5,8 +5,10 @@ from classes.ledger import Ledger
 from classes.record import Record
 from datetime import datetime
 
+
 def clear_screen():
-    os.system("cls" if os.name == "nt" else  "clear")
+    os.system("cls" if os.name == "nt" else "clear")
+
 
 def menu():
     string = "========== MENU ============\n"
@@ -19,12 +21,19 @@ def menu():
     return string
 
 
-def get_record(ledger: Ledger):
-    number = input("Enter the record # :")
+def get_record(ledger: Ledger, quit=False):
+    if not quit:
+        number = input("Enter the record # :")
+    else:
+        number = input("Enter the record # or press 'q' to goto main menu:")
     try:
+        if quit:
+            if number.strip().lower() == "q":
+                return "q"
         number = int(number)
         if 0 < number <= len(ledger.ledger):
             return number - 1
+
     except ValueError:
         raise ValueError("Invalid #")
 
@@ -36,7 +45,7 @@ def main():
     choice = input("Enter your choice : ")
     if choice == "1":
         try:
-            UID = ledger.create_uid()
+            uid = ledger.create_uid()
             title = input(f"Enter the title: ")
             amount = float(input(f"Enter the amount: "))
             is_income = input(f"Is this is an Income? (y/N):")
@@ -51,7 +60,7 @@ def main():
             desc = input(f"Enter the description: ")
             timestamp = datetime.now().strftime("%d-%m-%Y, %H:%M:%S")
             record = Record(
-                UID=UID,
+                UID=uid,
                 title=title,
                 amount=amount,
                 date=date,
@@ -64,27 +73,37 @@ def main():
         except ValueError as e:
             print(f"ERROR: {e}")
         finally:
-            sleep(2)
+            sleep(1)
 
     elif choice == "2":
-        clear_screen()
-        print(ledger)
-        input(f"Press Enter to go back...")
-
-    elif choice == "3":
-        try:
+        if not ledger.ledger:
+            print("The ledger is empty.")
+            sleep(1)
+        else:
             clear_screen()
             print(ledger)
-            print()
-            num = get_record(ledger)
-            clear_screen()
-            ledger.show(ledger.ledger[num])
             input(f"Press Enter to go back...")
-            
-        except ValueError as e:
-            print(f"ERROR: {e}")
-            sleep(2)
 
+    elif choice == "3":
+        if not ledger.ledger:
+            print("The ledger is empty.")
+            sleep(1)
+        else:
+            try:
+                while True:
+                    clear_screen()
+                    print(ledger)
+                    print()
+                    num = get_record(ledger, quit=True)
+                    if num == "q":
+                        break
+                    clear_screen()
+                    ledger.show(ledger.ledger[num])
+                    input(f"Press Enter to go back...")
+
+            except ValueError as e:
+                print(f"ERROR: {e}")
+                sleep(2)
 
     elif choice == "4":
         clear_screen()
@@ -97,19 +116,28 @@ def main():
         input(f"Press Enter to go back...")
 
     elif choice == "5":
-        try:
-            num = get_record(ledger)
-            confirm = input(
-                f"Are you sure to delete Transaction #{ledger[num].UID}? (y/N): "
-            )
-            if confirm.lower() == "y":
-                ledger.delete(ledger[num].UID)
-                print(f"Record with transaction ID #{ledger[num].UID} is deleted successfully.")
+        if not ledger.ledger:
+            print("The ledger is empty.")
+            sleep(1)
+        else:
+            clear_screen()
+            print(ledger)
+            try:
+                num = get_record(ledger)
+                uid = ledger.ledger[num].UID
+                confirm = input(
+                    f"Are you sure to delete Transaction #{uid}? (y/N): "
+                )
+                if confirm.lower() == "y":
+                    ledger.delete(uid)
+                    print(
+                        f"Record with transaction ID #{uid} is deleted successfully."
+                    )
+                    sleep(2)
+            except ValueError as e:
+                print(f"ERROR: {e}")
                 sleep(2)
-        except ValueError as e:
-            print(f"ERROR: {e}")
-            sleep(2)
-    
+
     elif choice == "6":
         return "q"
 
@@ -120,5 +148,5 @@ def main():
 if __name__ == "__main__":
     while True:
         q = main()
-        if q == 'q':
+        if q == "q":
             exit()
