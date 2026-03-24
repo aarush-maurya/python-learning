@@ -19,7 +19,6 @@ class Record:
         self.date = date
         self.category = category
         self.desc = desc
-        
 
     @property
     def UID(self):
@@ -131,7 +130,7 @@ class Record:
         string += "---------------------------------------------------\n"
         if self.desc:
             string += f"DESCRIPTION:\n {self.wrap_text(self.desc, 9)}\n"
-            string += f"===================================================\n"
+            string += "===================================================\n"
         return string
 
     @staticmethod

@@ -1,9 +1,9 @@
 import os
+from datetime import datetime
 from time import sleep
 
 from classes.ledger import Ledger
 from classes.record import Record
-from datetime import datetime
 
 
 def clear_screen():
@@ -12,12 +12,12 @@ def clear_screen():
 
 def menu():
     string = "========== MENU ============\n"
-    string += f"[1] Add Transaction\n"
-    string += f"[2] View All (Tabular)\n"
-    string += f"[3] Detailed Inspection\n"
-    string += f"[4] Financial Analytics\n"
-    string += f"[5] Delete Entry\n"
-    string += f"[6] Exit\n"
+    string += "[1] Add Transaction\n"
+    string += "[2] View All (Tabular)\n"
+    string += "[3] Detailed Inspection\n"
+    string += "[4] Financial Analytics\n"
+    string += "[5] Delete Entry\n"
+    string += "[6] Exit\n"
     return string
 
 
@@ -46,18 +46,18 @@ def main():
     if choice == "1":
         try:
             uid = ledger.create_uid()
-            title = input(f"Enter the title: ")
-            amount = float(input(f"Enter the amount: "))
-            is_income = input(f"Is this is an Income? (y/N):")
+            title = input("Enter the title: ")
+            amount = float(input("Enter the amount: "))
+            is_income = input("Is this is an Income? (y/N):")
             if is_income.lower() == "y":
                 pass
             else:
                 amount = -amount
             date = input(
-                f"Enter the date (DD-MM-YYYY) or press 'Enter' for current time: "
+                "Enter the date (DD-MM-YYYY) or press 'Enter' for current time: "
             )
-            category = input(f"Enter the category or press 'Enter' for uncategorized: ")
-            desc = input(f"Enter the description: ")
+            category = input("Enter the category or press 'Enter' for uncategorized: ")
+            desc = input("Enter the description: ")
             timestamp = datetime.now().strftime("%d-%m-%Y, %H:%M:%S")
             record = Record(
                 UID=uid,
@@ -82,7 +82,7 @@ def main():
         else:
             clear_screen()
             print(ledger)
-            input(f"Press Enter to go back...")
+            input("Press Enter to go back...")
 
     elif choice == "3":
         if not ledger.ledger:
@@ -99,7 +99,7 @@ def main():
                         break
                     clear_screen()
                     ledger.show(ledger.ledger[num])
-                    input(f"Press Enter to go back...")
+                    input("Press Enter to go back...")
 
             except ValueError as e:
                 print(f"ERROR: {e}")
@@ -109,11 +109,11 @@ def main():
         clear_screen()
         string = f"TOTAL INCOME: {ledger.total_income:.2f} INR\n"
         string += f"TOTAL EXPENSES: {ledger.total_expense:.2f} INR\n"
-        string += f"------------------------------\n"
+        string += "------------------------------\n"
         string += f"CURRENT BALANCE: {ledger.bal:.2f} INR\n"
         string += f"SAVINGS RATE: {ledger.saving_rate:.2f}%\n"
         print(string)
-        input(f"Press Enter to go back...")
+        input("Press Enter to go back...")
 
     elif choice == "5":
         if not ledger.ledger:
@@ -125,14 +125,10 @@ def main():
             try:
                 num = get_record(ledger)
                 uid = ledger.ledger[num].UID
-                confirm = input(
-                    f"Are you sure to delete Transaction #{uid}? (y/N): "
-                )
+                confirm = input(f"Are you sure to delete Transaction #{uid}? (y/N): ")
                 if confirm.lower() == "y":
                     ledger.delete(uid)
-                    print(
-                        f"Record with transaction ID #{uid} is deleted successfully."
-                    )
+                    print(f"Record with transaction ID #{uid} is deleted successfully.")
                     sleep(2)
             except ValueError as e:
                 print(f"ERROR: {e}")
@@ -142,7 +138,7 @@ def main():
         return "q"
 
     else:
-        print(f"'Invalid Choice.")
+        print("'Invalid Choice.")
 
 
 if __name__ == "__main__":

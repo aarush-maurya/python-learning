@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+
 from classes.record import Record
 
 
@@ -44,7 +44,6 @@ class Ledger:
         else:
             self.ledger.remove(record)
             self.save()
-            
 
     def save(self):
         with open("ledger.json", "w") as f:
@@ -102,7 +101,7 @@ class Ledger:
         )
 
         string = f"{'[#]':^{digit_width}} |    DATE    | {'TITLE':^{title_width}} | {'AMOUNT':^{amount_width}} | TYPE\n"
-        string += f"-------------------------------------------------------\n"
+        string += "-------------------------------------------------------\n"
         for index, record in enumerate(self.ledger, 1):
             string += f"{index:0>{digit_width}}. |"
             string += f" {record.date} |"
