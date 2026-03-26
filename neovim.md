@@ -81,11 +81,3 @@ When you need to see what you're doing before you "commit" the verb.
 * `:wq` : Save and Quit.
 * `:%s/old/new/g` : **Search and Replace** everything in the file.
 * `:noh` : **No Highlighting** (clears search yellow boxes).
-
----
-
-### Why this beats an AI Agent:
-When you write a `selection_sort` in Python, you might realize your `if` condition is inside the wrong loop. Instead of dragging a mouse or asking an AI to "fix the indentation," you simply:
-1.  Put cursor on the block.
-2.  Type `V` then `}` (Select Paragraph).
-3.  Type `>` (Indent) or `d`...`p` (Move).
