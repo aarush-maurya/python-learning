@@ -1,6 +1,6 @@
 # Python Learning & Projects 🐍
 
-This repository documents my **Python programming journey** through structured exercises and projects. It serves as a showcase of my coding skills, problem-solving, and hands-on Python experience.
+This repository documents my **Python programming journey** through structured exercises and projects. It serves as a showcase of my coding skills, problem-solving, and hands-on Python experience. This readme.md is AI generated BUT you get the point.
 
 ---
 
